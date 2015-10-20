@@ -32,10 +32,10 @@ import com.malikpoutch.tramparadise.R;
 import com.malikpoutch.tramparadise.metier.GestionLigneTram;
 import com.malikpoutch.tramparadise.metier.EvenementSignal;
 import com.malikpoutch.tramparadise.metier.IEvenementSignal;
-import com.malikpoutch.tramparadise.metier.connexionBDD.Event.AddEvent;
-import com.malikpoutch.tramparadise.metier.connexionBDD.Event.UserEventTimer;
-import com.malikpoutch.tramparadise.metier.connexionBDD.Users.PutPositionUser;
-import com.malikpoutch.tramparadise.metier.connexionBDD.Users.UpdatePositionUser;
+import com.malikpoutch.tramparadise.metier.UserMaster;
+import com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD.AddEvent;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UserEventTimer;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.PutPositionUser;
 import com.malikpoutch.tramparadise.metier.mock.EvenementSignalMock;
 import com.malikpoutch.tramparadise.utils.GestionImage;
 import com.malikpoutch.tramparadise.utils.VibrationTel;
@@ -291,6 +291,7 @@ public class HomeActivity extends AppCompatActivity implements
         longitude = location.getLongitude();
         altitude = location.getAltitude();
         accuracy = location.getAccuracy();
+
 
 
     }

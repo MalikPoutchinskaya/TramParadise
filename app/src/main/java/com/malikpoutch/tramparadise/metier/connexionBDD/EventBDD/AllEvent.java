@@ -1,4 +1,4 @@
-package com.malikpoutch.tramparadise.metier.connexionBDD.Event;
+package com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD;
 
 import android.app.ProgressDialog;
 import android.content.Context;

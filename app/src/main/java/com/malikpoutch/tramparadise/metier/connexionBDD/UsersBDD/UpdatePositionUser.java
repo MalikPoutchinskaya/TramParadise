@@ -1,4 +1,4 @@
-package com.malikpoutch.tramparadise.metier.connexionBDD.Users;
+package com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD;
 
 import android.content.Context;
 import android.os.AsyncTask;

@@ -1,11 +1,11 @@
-package com.malikpoutch.tramparadise.metier.connexionBDD.Event;
+package com.malikpoutch.tramparadise.metier.connexionBDD;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.malikpoutch.tramparadise.metier.connexionBDD.Event.AllEvent;
-import com.malikpoutch.tramparadise.metier.connexionBDD.Users.UpdatePositionUser;
+import com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD.AllEvent;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.UpdatePositionUser;
 import com.malikpoutch.tramparadise.utils.VibrationTel;
 
 import java.util.TimerTask;

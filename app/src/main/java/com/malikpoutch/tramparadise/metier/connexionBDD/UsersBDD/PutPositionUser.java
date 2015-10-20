@@ -1,9 +1,8 @@
-package com.malikpoutch.tramparadise.metier.connexionBDD.Event;
+package com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,24 +12,21 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by Malik on 25/08/2015.
+ * Created by Malik on 11/09/2015.
+ *
+ * Insert la position de l'user dans la BDD
  */
-public class AddEvent extends AsyncTask<String, Void, String> {
+public class PutPositionUser extends AsyncTask<String, Void, String> {
 
 
     // Mettre l'adresse du script PHP
     // Attention localhost ou 127.0.0.1 ne fonctionnent pas. Mettre l'adresse IP local.
-    public static final String strURL = "http://169.254.194.1/connexion_tramparadise.php";
+    public static final String strURL = "http://169.254.194.1/putPositionUsers.php";
 
     //Variable globale name, lat et long
     double latitude;
@@ -42,7 +38,7 @@ public class AddEvent extends AsyncTask<String, Void, String> {
 
 
     //Constructeur qui initialise variables
-    public AddEvent(double latitude, double longitude, String name, Context context) {
+    public PutPositionUser(double latitude, double longitude, String name, Context context) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
@@ -82,9 +78,7 @@ public class AddEvent extends AsyncTask<String, Void, String> {
     //This Method is called when Network-Request finished
     @Override
     protected void onPostExecute(String serverData) {
-        Log.e("onPostExecute", "envoi en base ok");
-        //Message popup de remerciement
-        Toast.makeText(mContext.getApplicationContext(), "Merci !", Toast.LENGTH_SHORT).show();
+        Log.e("onPostExecute PosUser", "envoi en base ok");
     }
 
     //Getters Setters
@@ -121,5 +115,6 @@ public class AddEvent extends AsyncTask<String, Void, String> {
         this.mContext = mContext;
     }
 }
+
 
 
