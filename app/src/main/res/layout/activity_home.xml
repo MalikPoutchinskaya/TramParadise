@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <!-- Contenu principal -->
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <!-- Who's here -->
+        <!-- SUD -->
+
+        <TextView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="23"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#0f860c"
+             />
+
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/quiestla"
+
+            />
+
+        <!-- NORD -->
+
+        <TextView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@id/map"
+            android:text="14"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#0f860c"
+            />
+
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@id/map"
+            android:src="@drawable/quiestla"
+
+            />
+
+        <!-- EST -->
+
+        <TextView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@id/map"
+            android:text="3"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#0f860c"
+            />
+
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@id/map"
+            android:src="@drawable/quiestla"
+
+            />
+
+        <!-- OUEST -->
+
+        <TextView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@id/map"
+            android:text="46"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#0f860c"
+            />
+
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@id/map"
+            android:src="@drawable/quiestla"
+
+            />
+
+    </RelativeLayout>
+
+    <!-- Menu -->
+
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFF"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+</android.support.v4.widget.DrawerLayout>
