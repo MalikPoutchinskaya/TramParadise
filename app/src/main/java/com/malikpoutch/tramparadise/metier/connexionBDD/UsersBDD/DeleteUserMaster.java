@@ -19,14 +19,14 @@ import java.util.ArrayList;
 /**
  * Created by Malik on 11/09/2015.
  *
- * Update la position de l'user. Classe executé dans le onLocationChanged
+ * Delte la position de l'user. Classe executé dans onDestroy de l'app
  */
-public class UpdatePositionUser extends AsyncTask<String, Void, String> {
+public class DeleteUserMaster extends AsyncTask<String, Void, String> {
 
 
     // Mettre l'adresse du script PHP
     // Attention localhost ou 127.0.0.1 ne fonctionnent pas. Mettre l'adresse IP local.
-    public static final String strURL = "http://169.254.194.1/updatePositionUsers.php";
+    public static final String strURL = "http://169.254.194.1/deleteUserWhenDestroy.php";
 
     //Variable globale name, lat et long
     double latitude;
@@ -38,12 +38,12 @@ public class UpdatePositionUser extends AsyncTask<String, Void, String> {
 
 
     //Constructeur par défaut utilisé lors du onChanged position
-    public UpdatePositionUser(){
+    public DeleteUserMaster(){
 
     }
 
     //Constructeur qui initialise variables
-    public UpdatePositionUser(double latitude, double longitude, String name, Context context) {
+    public DeleteUserMaster(double latitude, double longitude, String name, Context context) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;

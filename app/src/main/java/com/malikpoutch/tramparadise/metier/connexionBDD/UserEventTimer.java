@@ -37,8 +37,7 @@ public class UserEventTimer extends TimerTask {
         Log.e("timer", "je passe");
         AllEvent allEvent = new AllEvent(mContext, mapi, vibrationTel);
         allEvent.execute();
-        UpdatePositionUser updatePositionUser = new UpdatePositionUser(latitude, longitude, name, mContext);
-        updatePositionUser.execute();
+
 
     }
 

@@ -17,11 +17,13 @@
 
 
     <string name="description_tramparadise">Tram Paradise est une application collaborative ayant pour but
-                                l anticipation des désagréments du transports en commun. L application
+                                l anticipation des désagréments du transports en commun. L\' application
                                 est en version beta.  Bon voyage!</string>
 
 
     <string name="url">Settings</string>
+    <string name="nbEst">0</string>
+
 
 
 

@@ -21,6 +21,8 @@
         <!-- SUD -->
 
         <TextView
+            android:id="@+id/nbSud"
+
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_marginTop="5dp"
@@ -43,6 +45,7 @@
         <!-- NORD -->
 
         <TextView
+            android:id="@+id/nbNord"
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_marginBottom="5dp"
@@ -67,12 +70,13 @@
         <!-- EST -->
 
         <TextView
+            android:id="@+id/nbEst"
+
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
             android:layout_alignRight="@id/map"
-            android:text="3"
             android:gravity="center"
             android:textAlignment="gravity"
             android:textColor="#0f860c"
@@ -91,6 +95,8 @@
         <!-- OUEST -->
 
         <TextView
+            android:id="@+id/nbOuest"
+
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_marginLeft="5dp"

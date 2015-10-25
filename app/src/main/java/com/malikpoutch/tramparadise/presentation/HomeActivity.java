@@ -1,5 +1,6 @@
 package com.malikpoutch.tramparadise.presentation;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,12 +14,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,18 +32,23 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.malikpoutch.tramparadise.R;
-import com.malikpoutch.tramparadise.metier.GestionLigneTram;
 import com.malikpoutch.tramparadise.metier.EvenementSignal;
+import com.malikpoutch.tramparadise.metier.GestionLigneTram;
 import com.malikpoutch.tramparadise.metier.IEvenementSignal;
 import com.malikpoutch.tramparadise.metier.UserMaster;
 import com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD.AddEvent;
 import com.malikpoutch.tramparadise.metier.connexionBDD.UserEventTimer;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.DeleteUserMaster;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.GestionAffichageUserOther;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.GetAllUserOther;
 import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.PutPositionUser;
+import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.UpdatePositionUser;
 import com.malikpoutch.tramparadise.metier.mock.EvenementSignalMock;
 import com.malikpoutch.tramparadise.utils.GestionImage;
 import com.malikpoutch.tramparadise.utils.VibrationTel;
 
 import java.util.Timer;
+import java.util.UUID;
 
 
 public class HomeActivity extends AppCompatActivity implements
@@ -49,6 +57,9 @@ public class HomeActivity extends AppCompatActivity implements
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+
+
+
 
     //Variable de positionnement
     private LocationManager lm;
@@ -89,8 +100,8 @@ public class HomeActivity extends AppCompatActivity implements
         mDrawerList.setAdapter(adaptateur);
 
         //On insert la position du user dans la BDD
-        //TODO: bouchonnage du nom a retirer
-        String name = "mock";
+        //en cherchant son identifiant unique
+        String name = getDeviceId();
         PutPositionUser putPositionUser = new PutPositionUser(latitude, longitude,name,getApplicationContext());
         putPositionUser.execute();
 
@@ -222,8 +233,8 @@ public class HomeActivity extends AppCompatActivity implements
 
     //Ouvre une boite de dialogue permettant de confirmer la selection
     //Prend en parametre la position dans le menu des Evenements
-    int i = 0;
-    int j = 0;
+    private int i = 0;
+    private int j = 0;
     public void BoiteDeConfirmation(final int position) {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -292,6 +303,26 @@ public class HomeActivity extends AppCompatActivity implements
         altitude = location.getAltitude();
         accuracy = location.getAccuracy();
 
+        //Met a jour la BDD pourla position du Master
+        UpdatePositionUser updatePositionUser = new UpdatePositionUser(latitude, longitude, getDeviceId(), getApplicationContext());
+        updatePositionUser.execute();
+
+        //Création d'un Master avec position. Envoi du Master au metier GestionAff pour traitement
+        LatLng latLng = new LatLng(latitude,longitude);
+        UserMaster userMaster = new UserMaster();
+        userMaster.setPositionUserMaster(latLng);
+
+
+        //J'envoi mon Master avec sa location et je valorise la localisation des Others
+        GestionAffichageUserOther gestionAffichageUserOther = new GestionAffichageUserOther();
+        gestionAffichageUserOther.setUserMaster(userMaster);
+        TextView est = (TextView)findViewById(R.id.nbEst);
+        TextView ouest = (TextView)findViewById(R.id.nbOuest);
+        TextView sud = (TextView)findViewById(R.id.nbSud);
+        TextView nord = (TextView)findViewById(R.id.nbNord);
+        GetAllUserOther getAllUserOther = new GetAllUserOther(gestionAffichageUserOther, est, ouest, sud, nord);
+        getAllUserOther.execute();
+
 
 
     }
@@ -348,6 +379,46 @@ public class HomeActivity extends AppCompatActivity implements
         lm.removeUpdates(this);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //On vient ici supprimer l'user dans la bdd quand l'app se ferme
+        //TODO: retirer lat, long , context.. juste inutile
+        DeleteUserMaster deleteUserMaster = new DeleteUserMaster(latitude, longitude, getDeviceId(), getApplicationContext());
+        deleteUserMaster.execute();
+        Log.e("onStop", "supp en table ok !");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //On insert la position du user dans la BDD again car delete dans le onPause (voir cycle de vie d'une app)
+        //en cherchant son identifiant unique
+        String name = getDeviceId();
+        PutPositionUser putPositionUser = new PutPositionUser(latitude, longitude,name,getApplicationContext());
+        putPositionUser.execute();
+        Log.e("onRestart", "remis en table ok !");
+    }
+
+
+    public String getDeviceId(){
+        //Connaitre l'ID du telephone. Afin de mettre en table
+        final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+
+        final String tmDevice;
+        final String tmSerial;
+        final String androidId;
+
+        //On recherche l'ID unique du telephone
+        tmDevice = "" + tm.getDeviceId();
+        tmSerial = "" + tm.getSimSerialNumber();
+        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        String deviceId = deviceUuid.toString();
+
+        return deviceId;
+    }
 
 
 

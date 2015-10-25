@@ -2,6 +2,8 @@ package com.malikpoutch.tramparadise.metier;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 /**
  * Created by Malik on 20/10/2015.
  */
@@ -10,6 +12,8 @@ public class UserOther {
     LatLng positionUserOther;
 
     int idUserOther;
+
+    ArrayList<LatLng> lstUserOthers = null;
 
 
 
@@ -29,5 +33,13 @@ public class UserOther {
 
     public void setIdUserOther(int idUserOther) {
         this.idUserOther = idUserOther;
+    }
+
+    public ArrayList<LatLng> getLstUserOthers() {
+        return lstUserOthers;
+    }
+
+    public void setLstUserOthers(ArrayList<LatLng> lstUserOthers) {
+        this.lstUserOthers = lstUserOthers;
     }
 }

@@ -165,6 +165,8 @@ public class AllEvent extends AsyncTask<String, String, String> {
 
         //On parcour l'arrayList
         for (int a = 0; a < eventList.size(); a++) {
+            //Todo: renvoyer juste la liste dans une classe AllEvent et traiter la liste dans une autre classe dédié
+
             for (IEvenementSignal e : lstEventMock
                     ) {
                 if (listName.get(a).equals(e.getNom())) {
