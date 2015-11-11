@@ -25,7 +25,7 @@ public class AddEvent extends AsyncTask<String, Void, String> {
 
     // Mettre l'adresse du script PHP
     // Attention localhost ou 127.0.0.1 ne fonctionnent pas. Mettre l'adresse IP local.
-    public static final String strURL = "http://169.254.194.1/connexion_tramparadise.php";
+    public static final String strURL = "http://tramp.hol.es/AccesBDDTramParadise/Events/addEvent.php";
 
     //Variable globale name, lat et long
     double latitude;

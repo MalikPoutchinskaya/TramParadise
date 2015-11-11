@@ -69,7 +69,7 @@ public class AllEvent extends AsyncTask<String, String, String> {
     HashMap<String, String> map = new HashMap<String, String>();
 
     // url to get all products list
-    private static String url_all_products = "http://169.254.194.1/read_tramparadise.php";
+    private static String url_all_products = "http://tramp.hol.es/AccesBDDTramParadise/Events/SelectAllEvent.php";
 
     //Récupération de la list d'event
     EvenementSignalMock eventMock = new EvenementSignalMock();

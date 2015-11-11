@@ -26,7 +26,7 @@ public class DeleteUserMaster extends AsyncTask<String, Void, String> {
 
     // Mettre l'adresse du script PHP
     // Attention localhost ou 127.0.0.1 ne fonctionnent pas. Mettre l'adresse IP local.
-    public static final String strURL = "http://169.254.194.1/deleteUserWhenDestroy.php";
+    public static final String strURL = "http://tramp.hol.es/AccesBDDTramParadise/Users/deleteUserWhenDestroy.php";
 
     //Variable globale name, lat et long
     double latitude;

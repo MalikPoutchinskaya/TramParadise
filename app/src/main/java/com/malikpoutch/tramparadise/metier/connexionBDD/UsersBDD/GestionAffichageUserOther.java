@@ -25,19 +25,47 @@ public class GestionAffichageUserOther {
     public void tchekWhereIsOther() {
         for (LatLng userOther : lstUserOthers
                 ) {
-            if (isNorth(userOther)) {
-                nbOtherNorth++;
-            } else {
-                nbOtherSud++;
-            }
-            if (isOuest(userOther)) {
-                nbOtherOuest++;
-            } else {
-                nbOtherEst++;
+            if (isNorth(userOther) && isOuest(userOther)) {
+                double compareLat = Math.abs(userOther.latitude - userMaster.getPositionUserMaster().latitude);
+                double compareLong = Math.abs(userOther.longitude - userMaster.getPositionUserMaster().longitude);
+
+                if (compareLat > compareLong)
+                    nbOtherNorth++;
+                else {
+                    nbOtherOuest++;
+                }
+            } else if (isNorth(userOther) && !isOuest(userOther)) {
+                double compareLat = Math.abs(userOther.latitude - userMaster.getPositionUserMaster().latitude);
+                double compareLong = Math.abs(userOther.longitude - userMaster.getPositionUserMaster().longitude);
+
+                if (compareLat > compareLong)
+                    nbOtherNorth++;
+                else {
+                    nbOtherEst++;
+                }
+            } else if (!isNorth(userOther) && !isOuest(userOther)) {
+                double compareLat = Math.abs(userOther.latitude - userMaster.getPositionUserMaster().latitude);
+                double compareLong = Math.abs(userOther.longitude - userMaster.getPositionUserMaster().longitude);
+
+                if (compareLat > compareLong)
+                    nbOtherSud++;
+                else if (compareLat < compareLong) {
+                    nbOtherEst++;
+                }
+            } else if (!isNorth(userOther) && isOuest(userOther)) {
+                double compareLat = Math.abs(userOther.latitude - userMaster.getPositionUserMaster().latitude);
+                double compareLong = Math.abs(userOther.longitude - userMaster.getPositionUserMaster().longitude);
+
+                if (compareLat > compareLong)
+                    nbOtherSud++;
+                else {
+                    nbOtherOuest++;
+                }
+
+
             }
 
         }
-
     }
 
     public boolean isOuest(LatLng userOther) {
@@ -53,8 +81,6 @@ public class GestionAffichageUserOther {
         }
         return false;
     }
-
-
 
 
     //getters and setters

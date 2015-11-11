@@ -87,8 +87,9 @@ public class JSONParser {
             json = sb.toString();
 
             //TODO: solution de remplacement.. il y a une erreur dans le fichier php.. à mettre à jour
-            //Je retire les caractères gènant pour le parsing
-            json = json.substring(1998);
+            //Je retire les caractères gènant pour le parsing (275 pour hostinger / 1998 pour wamp)
+           // json = json.substring(1);
+            //json="{\"tbevent\":"+ json;
 
 
 

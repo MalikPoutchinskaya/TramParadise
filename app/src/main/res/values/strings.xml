@@ -10,14 +10,14 @@
     <string name="list_image"></string>
     <string name="question_confiramtion">Are you sure to confirm the event: </string>
     <string name="provider_enabled">The provider %s is now enabled</string>
-    <string name="provider_disabled">The provider %s is now disabled</string>
+    <string name="provider_disabled">Desolé,le réseau %s n\'est pas disponible</string>
     <string name="provider_new_status">The provider %1$s has now a new status %2$s</string>
     <string name="new_location">New Location : Latitude = %1$s, Longitude = %2$s, Altitude = %3$s avec une précision de %4$s mètres </string>
 
 
 
     <string name="description_tramparadise">Tram Paradise est une application collaborative ayant pour but
-                                l anticipation des désagréments du transports en commun. L\' application
+                                l\'anticipation des désagréments du transports en commun. L\' application
                                 est en version beta.  Bon voyage!</string>
 
 

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.model.LatLng;
 import com.malikpoutch.tramparadise.metier.GestionLigneTram;
 import com.malikpoutch.tramparadise.metier.mock.EvenementSignalMock;
-import com.malikpoutch.tramparadise.utils.JSONParser4Others;
+import com.malikpoutch.tramparadise.utils.JSONParser;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -58,7 +58,7 @@ public class GetAllUserOther extends AsyncTask<String, String, String> {
     private ProgressDialog pDialog;
 
     // Creating JSON Parser object
-    JSONParser4Others jParser = new JSONParser4Others();
+    JSONParser jParser = new JSONParser();
 
     ArrayList<HashMap<String, String>> eventList = new ArrayList<HashMap<String, String>>();
 
@@ -70,7 +70,7 @@ public class GetAllUserOther extends AsyncTask<String, String, String> {
     HashMap<String, String> map = new HashMap<String, String>();
 
     // url to get all products list
-    private static String url_all_products = "http://169.254.194.1/getAllUserOther.php";
+    private static String url_all_products = "http://tramp.hol.es/AccesBDDTramParadise/Users/getAllUserOther.php";
 
     //Récupération de la list d'event
     EvenementSignalMock eventMock = new EvenementSignalMock();
