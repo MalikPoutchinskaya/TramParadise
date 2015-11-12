@@ -1,6 +1,8 @@
 package com.malikpoutch.tramparadise.metier;
 
 
+import java.util.Date;
+
 /**
  * Created by mbouras on 08/07/2015.
  */
@@ -12,6 +14,7 @@ public class EvenementSignal implements IEvenementSignal {
     private double latitude;
     private int noLigne;
     private Integer imageMarker;
+    private Date date;
 
     public EvenementSignal() {
     }
@@ -93,5 +96,13 @@ public class EvenementSignal implements IEvenementSignal {
 
     public void setImageMarker(Integer imageMarker) {
         this.imageMarker = imageMarker;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

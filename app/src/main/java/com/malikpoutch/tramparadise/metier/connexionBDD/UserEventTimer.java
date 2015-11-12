@@ -4,10 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD.AllEvent;
-import com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD.UpdatePositionUser;
+import com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD.GetAllEvent;
 import com.malikpoutch.tramparadise.utils.VibrationTel;
 
+import java.util.Date;
 import java.util.TimerTask;
 
 /**
@@ -20,7 +20,7 @@ public class UserEventTimer extends TimerTask {
     private VibrationTel vibrationTel;
     private double latitude;
     private double longitude;
-    private String name = "hey babe";
+    private String name;
 
 
     //Constructeur pour les vibrations si nouvel event et l'update de la position des users
@@ -35,8 +35,8 @@ public class UserEventTimer extends TimerTask {
 
     public void run() {
         Log.e("timer", "je passe");
-        AllEvent allEvent = new AllEvent(mContext, mapi, vibrationTel);
-        allEvent.execute();
+        GetAllEvent getAllEvent = new GetAllEvent(mContext, mapi, vibrationTel);
+        getAllEvent.execute();
 
 
     }

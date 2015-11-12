@@ -22,9 +22,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Malik on 28/08/2015.
@@ -32,7 +37,7 @@ import java.util.List;
  * <p/>
  * Background Async Task to Load all product by making HTTP Request
  */
-public class AllEvent extends AsyncTask<String, String, String> {
+public class GetAllEvent extends AsyncTask<String, String, String> {
 
     //Insiation de la classe dessin des lignes de tram
     GestionLigneTram gestionLigneTram = new GestionLigneTram();
@@ -43,12 +48,13 @@ public class AllEvent extends AsyncTask<String, String, String> {
     private VibrationTel vibrationTel;
 
 
-    public AllEvent(Context context, GoogleMap map, VibrationTel vibrationTel) {
+    public GetAllEvent(Context context, GoogleMap map, VibrationTel vibrationTel) {
         mContext = context;
         this.mapi = map;
         this.vibrationTel = vibrationTel;
 
     }
+
 
 
     // Progress Dialog
@@ -63,6 +69,8 @@ public class AllEvent extends AsyncTask<String, String, String> {
     ArrayList<String> listName = new ArrayList<String>();
     ArrayList<Double> listLat = new ArrayList<Double>();
     ArrayList<Double> listLong = new ArrayList<Double>();
+    ArrayList<String> listDate = new ArrayList<String>();
+
 
 
     // creating new HashMap
@@ -85,6 +93,8 @@ public class AllEvent extends AsyncTask<String, String, String> {
     private static final String TAG_NAME = "name";
     private static final String TAG_LAT = "lat";
     private static final String TAG_LONG = "long";
+    private static final String TAG_DATE = "date";
+
 
 
     // products JSONArray
@@ -129,11 +139,15 @@ public class AllEvent extends AsyncTask<String, String, String> {
                     String name = c.getString(TAG_NAME);
                     Double lat = Double.parseDouble(c.getString(TAG_LAT)); //Parse du string de la bdd en double
                     Double longi = Double.parseDouble(c.getString(TAG_LONG)); //Parse du string de la bdd en double
+                    String date = c.getString(TAG_DATE);
 
 
                     listName.add(name);
                     listLat.add(lat);
                     listLong.add(longi);
+                    listDate.add(date);
+
+
 
 
                     // adding each child node to HashMap key => value
@@ -165,7 +179,7 @@ public class AllEvent extends AsyncTask<String, String, String> {
 
         //On parcour l'arrayList
         for (int a = 0; a < eventList.size(); a++) {
-            //Todo: renvoyer juste la liste dans une classe AllEvent et traiter la liste dans une autre classe dédié
+            //Todo: renvoyer juste la liste dans une classe GetAllEvent et traiter la liste dans une autre classe dédié
 
             for (IEvenementSignal e : lstEventMock
                     ) {
@@ -180,6 +194,7 @@ public class AllEvent extends AsyncTask<String, String, String> {
                     //Ajoute tout les marker de la base à la map
                     mapi.addMarker(new MarkerOptions()
                             .icon(BitmapDescriptorFactory.fromBitmap(marker))
+                            .title(listDate.get(a))
                             .position(new LatLng(listLat.get(a), listLong.get(a))));
 
                     //Remet les lignes de Tram!
