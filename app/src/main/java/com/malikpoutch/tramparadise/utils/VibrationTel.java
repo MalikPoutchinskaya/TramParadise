@@ -1,6 +1,8 @@
 package com.malikpoutch.tramparadise.utils;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.os.Build;
@@ -16,11 +18,8 @@ public class VibrationTel {
     int nbrePassage = 0;
     int modeVibration = 2;
     int sizeBddBefore; //Permet de stocker la taille de la Bdd pour comparaison
-    int repeatVib = 5000;
+    int repeatVib = 500; // 0.5secondes
     Context context;
-
-    //Instance de la sonnerie
-    //AudioAttributes.Builder attributes = new AudioAttributes.Builder();
 
 
     //Constructeur, recupere le context du thread principal
@@ -33,10 +32,18 @@ public class VibrationTel {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void doVibration() {
         Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-       // attributes.setUsage(AudioAttributes.USAGE_ALARM);
+
+
+        AudioAttributes.Builder attrs = new AudioAttributes.Builder();
+        attrs.setUsage(AudioAttributes.USAGE_ALARM);
+
+
+
+
 
         //vib.vibrate(repeatVib, attributes.build());
-        vib.vibrate(repeatVib);
+        vib.vibrate(repeatVib, attrs.build());
+
 
         Log.e("sonnoooo", vib.hasVibrator()+"");
 

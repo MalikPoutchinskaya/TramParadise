@@ -39,8 +39,7 @@ import java.util.Locale;
  */
 public class GetAllEvent extends AsyncTask<String, String, String> {
 
-    //Insiation de la classe dessin des lignes de tram
-    GestionLigneTram gestionLigneTram = new GestionLigneTram();
+
 
     //Context + GoogleMap +  constructeur
     private Context mContext;
@@ -48,13 +47,18 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
     private VibrationTel vibrationTel;
 
 
+
+
     public GetAllEvent(Context context, GoogleMap map, VibrationTel vibrationTel) {
-        mContext = context;
+        this.mContext = context;
         this.mapi = map;
         this.vibrationTel = vibrationTel;
 
     }
 
+
+    //Insiation de la classe dessin des lignes de tram
+    GestionLigneTram gestionLigneTram = new GestionLigneTram(mContext);
 
 
     // Progress Dialog

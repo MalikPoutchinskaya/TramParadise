@@ -29,8 +29,7 @@ import java.util.List;
  */
 public class GetAllUserOther extends AsyncTask<String, String, String> {
 
-    //Insiation de la classe dessin des lignes de tram
-    GestionLigneTram gestionLigneTram = new GestionLigneTram();
+
 
     //GetAllUserOther pour renvoyer en Metier
     GestionAffichageUserOther gestionAffichageUserOther = new GestionAffichageUserOther();

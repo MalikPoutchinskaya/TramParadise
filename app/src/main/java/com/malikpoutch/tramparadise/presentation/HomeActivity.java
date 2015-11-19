@@ -1,5 +1,6 @@
 package com.malikpoutch.tramparadise.presentation;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.malikpoutch.tramparadise.R;
 import com.malikpoutch.tramparadise.metier.EvenementSignal;
 import com.malikpoutch.tramparadise.metier.GestionLigneTram;
@@ -73,8 +75,7 @@ public class HomeActivity extends AppCompatActivity implements
     //Instance du Mock
     EvenementSignalMock eventMock = new EvenementSignalMock();
 
-    //Insiation de la classe dessin des lignes de tram
-    GestionLigneTram gestionLigneTram = new GestionLigneTram();
+
 
     //Chargement de la liste du menu de gauche
     String[] values = new String[]{eventMock.getControl().getNom(), eventMock.getAccident().getNom(), eventMock.getArret().getNom(), eventMock.getRetard().getNom()}; //charge le nombre d'option du menu, ici 4
@@ -197,15 +198,16 @@ public class HomeActivity extends AppCompatActivity implements
         // MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        //Insiation de la classe dessin des lignes de tram
+        GestionLigneTram gestionLigneTram = new GestionLigneTram(getApplicationContext());
 
         // Dessin de la ligne1 du tram NANTES.
-        //TODO: voir inside la méthode
-
-        map.addPolyline(gestionLigneTram.dessinLigne1());
-        map.addPolyline(gestionLigneTram.dessinLigne2());
-        map.addPolyline(gestionLigneTram.dessinLigne3());
+        for (PolylineOptions polylineOptions: gestionLigneTram.getListTramNantes()
+             ) {
+            map.addPolyline(polylineOptions);
 
 
+        }
     }
 
 
@@ -223,12 +225,26 @@ public class HomeActivity extends AppCompatActivity implements
      * Le paramètre est la position dans la liste du menu de gauche
      */
     private void selectItem(int position) {
-
-        BoiteDeConfirmation(position);
-
         //une fois l'evenement selectionne, on ferme le menu
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);
+
+        //Insiation de la classe dessin des lignes de tram
+        GestionLigneTram gestionLigneTram = new GestionLigneTram(getApplicationContext());
+
+        //prend la pos de l'user
+        LatLng latLngUser = new LatLng(latitude,longitude);
+        //test si sur la ligne 1 du tram
+        if(gestionLigneTram.autreTesteZone(latLngUser)){
+            BoiteDeConfirmation(position);
+
+        }
+        else{
+           Toast.makeText(getApplicationContext(), getResources().getString(R.string.PasSurTram), Toast.LENGTH_LONG).show();
+
+        }
+
+
 
     }
 
@@ -281,7 +297,7 @@ public class HomeActivity extends AppCompatActivity implements
                                 }
                             }
                         } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), "Oops!.. une erreur s'est produite!", Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(), "Oops!.. une erreur s'est produite!", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -295,6 +311,13 @@ public class HomeActivity extends AppCompatActivity implements
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Confirmer la presence d'un " + values[position].toUpperCase() + " ?").setPositiveButton("OUI!", dialogClickListener)
                 .setNegativeButton("Nan..", dialogClickListener).show();
+    }
+
+    //Boite dialogue d'information
+    public void BoiteRefus() {
+        Dialog dialog = new Dialog(getApplicationContext());
+        dialog.setContentView(R.layout.popup_refus);
+        dialog.show();
     }
 
     //Methodes liee a l'implementation de la Class Location Listener

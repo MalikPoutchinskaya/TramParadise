@@ -39,6 +39,12 @@ S
             android:name=".presentation.APropos">
         </activity>
 
+        <activity
+            android:name=".presentation.Acceuil">
+        </activity>
+
+        
+
 
     </application>
 
