@@ -15,10 +15,10 @@ import java.util.ArrayList;
 public class EvenementSignalMock {
 
 
-        IEvenementSignal control = new EvenementSignal("Control", R.drawable.police_icon, R.drawable.marker_cops, 0);
-        IEvenementSignal accident = new EvenementSignal("Accident", R.drawable.break_icon,  R.drawable.marker_accident, 1);
-        IEvenementSignal arret = new EvenementSignal("Arret", R.drawable.arret_icon,  R.drawable.marker_arret, 2);
-        IEvenementSignal retard = new EvenementSignal("Retard", R.drawable.retard_icon,  R.drawable.marker_retard, 3);
+        IEvenementSignal control = new EvenementSignal("Control", R.drawable.cops_icon_menu, R.drawable.marker_cops, 0);
+        IEvenementSignal accident = new EvenementSignal("Accident", R.drawable.accident_icon_menu,  R.drawable.marker_accident, 1);
+        IEvenementSignal arret = new EvenementSignal("Arret", R.drawable.arret_icon_menu,  R.drawable.marker_arret, 2);
+        IEvenementSignal retard = new EvenementSignal("Retard", R.drawable.retard_icon_menu,  R.drawable.marker_retard, 3);
 
 
     ArrayList<IEvenementSignal> listEvent = new ArrayList<IEvenementSignal>();

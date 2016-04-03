@@ -3,6 +3,8 @@
     <item android:id="@+id/action_apropos" android:title="@string/action_apropos"
         android:orderInCategory="100" android:showAsAction="never" />
     <item android:id="@+id/action_settings" android:title="How to use"/>
+    <item android:id="@+id/action_acceuil" android:title="@string/action_acceuil"/>
+
 </menu>
 
 

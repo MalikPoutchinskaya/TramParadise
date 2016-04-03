@@ -28,20 +28,24 @@ public class AddEvent extends AsyncTask<String, Void, String> {
     public static final String strURL = "http://tramp.hol.es/AccesBDDTramParadise/Events/addEvent.php";
 
     //Variable globale name, lat et long
-    double latitude;
-    double longitude;
-    String name;
+    private double latitude;
+    private double longitude;
+    private String name;
+    private String ligne;
+    private String direction;
 
     //Context + constructeur
     private Context mContext;
 
 
     //Constructeur qui initialise variables
-    public AddEvent(double latitude, double longitude, String name, Context context) {
+    public AddEvent(double latitude, double longitude, String name, Context context, String ligne, String direction) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
         this.mContext = context;
+        this.direction =direction;
+        this.ligne = ligne;
     }
 
     protected String doInBackground(String... urls) {
@@ -57,6 +61,9 @@ public class AddEvent extends AsyncTask<String, Void, String> {
         nameValuePairs.add(new BasicNameValuePair("name", name));
         nameValuePairs.add(new BasicNameValuePair("lat", latitude + ""));
         nameValuePairs.add(new BasicNameValuePair("long", longitude + ""));
+        nameValuePairs.add(new BasicNameValuePair("ligne", ligne + ""));
+        nameValuePairs.add(new BasicNameValuePair("direction", direction + ""));
+
 
 
         // Envoie de la commande http
@@ -114,6 +121,22 @@ public class AddEvent extends AsyncTask<String, Void, String> {
 
     public void setmContext(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public String getLigne() {
+        return ligne;
+    }
+
+    public void setLigne(String ligne) {
+        this.ligne = ligne;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }
 

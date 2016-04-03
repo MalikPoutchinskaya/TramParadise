@@ -13,9 +13,9 @@ import java.util.TimerTask;
  * Created by Malik on 08/08/2015.
  * See: http://stackoverflow.com/questions/2227292/how-to-get-latitude-and-longitude-of-the-mobiledevice-in-android
  *
- * Class non utilise sur le projet pour l'instant. Permettra d'externalisé les méthodes si dessous prsésente dans HomeActivity
+ * Class non utilise sur le projet pour l'instant. Permettra d'externalisé les méthodes si dessous prsésente dans MapActivity
  *
- * Pour appeler cette Class, dans onCreate de HomeActivity, faire map.setMyLocationEnabled(true);
+ * Pour appeler cette Class, dans onCreate de MapActivity, faire map.setMyLocationEnabled(true);
  *
  */
 public class MyLocation {

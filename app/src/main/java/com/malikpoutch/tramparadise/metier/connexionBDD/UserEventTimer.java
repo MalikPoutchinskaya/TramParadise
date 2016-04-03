@@ -2,12 +2,17 @@ package com.malikpoutch.tramparadise.metier.connexionBDD;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.malikpoutch.tramparadise.R;
 import com.malikpoutch.tramparadise.metier.connexionBDD.EventBDD.GetAllEvent;
+import com.malikpoutch.tramparadise.utils.CustomProgressDialog;
 import com.malikpoutch.tramparadise.utils.VibrationTel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimerTask;
 
 /**
@@ -21,21 +26,23 @@ public class UserEventTimer extends TimerTask {
     private double latitude;
     private double longitude;
     private String name;
-
+    private ProgressBar pbar;
 
     //Constructeur pour les vibrations si nouvel event et l'update de la position des users
-    public UserEventTimer(Context mContext, GoogleMap mapi, VibrationTel vibrationTel, double longitude, double latitude) {
+    public UserEventTimer(Context mContext, GoogleMap mapi, VibrationTel vibrationTel, double longitude, double latitude,ProgressBar pbar) {
         this.mContext = mContext;
         this.mapi = mapi;
         this.vibrationTel = vibrationTel;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.pbar = pbar;
     }
 
 
     public void run() {
         Log.e("timer", "je passe");
-        GetAllEvent getAllEvent = new GetAllEvent(mContext, mapi, vibrationTel);
+
+        GetAllEvent getAllEvent = new GetAllEvent(mContext, mapi, vibrationTel, pbar);
         getAllEvent.execute();
 
 

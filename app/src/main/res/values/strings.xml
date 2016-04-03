@@ -3,6 +3,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_apropos">A propos de Tram Paradise...</string>
+    <string name="action_acceuil">Retour à l\'acceuil</string>
     <string name="open_drawer">Ouvert!</string>
     <string name="close_drawer">Ferme!</string>
     <string name="list_nom"></string>
@@ -24,7 +25,29 @@
     <string name="nbEst">0</string>
 
 
+    <string-array name="numero_ligne">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
+    <string-array name="directionL1">
+        <item>Francois Mitterand</item>
+        <item>Beaujoire</item>
+        <item>Jamais</item>
+    </string-array>
+
+    <string-array name="directionL2">
+        <item>Gare de Pont-Rousseau</item>
+        <item>Orvault-Grand Val</item>
+    </string-array>
+
+    <string-array name="directionL3">
+        <item>Neustrie</item>
+        <item>Marcel Paul</item>
+        <item>bubulle</item>
+
+    </string-array>
 
 
 </resources>

@@ -12,7 +12,10 @@ public class EvenementSignal implements IEvenementSignal {
     private Integer image;
     private double longitude;
     private double latitude;
+    //numero de la ligne de la liste dumenu de droite
     private int noLigne;
+    private String ligneTram;
+    private String direction;
     private Integer imageMarker;
     private Date date;
 
@@ -20,8 +23,7 @@ public class EvenementSignal implements IEvenementSignal {
     }
 
 
-    //Constructeur spécifique pour le menu
-
+    //Constructeur pour la BDD
     public EvenementSignal(String nom, Integer image, double longitude, double latitude, int noLigne) {
         this.nom = nom;
         this.image = image;
@@ -30,7 +32,7 @@ public class EvenementSignal implements IEvenementSignal {
         this.noLigne = noLigne;
     }
 
-    //Constructeur pour la BDD
+    //Constructeur spécifique pour le menu
     public EvenementSignal(String nom, Integer image, Integer imageMarker, int noLigne) {
         this.nom = nom;
         this.image = image;
@@ -104,5 +106,13 @@ public class EvenementSignal implements IEvenementSignal {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }

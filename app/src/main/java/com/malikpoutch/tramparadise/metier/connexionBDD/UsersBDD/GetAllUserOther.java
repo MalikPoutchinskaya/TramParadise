@@ -1,8 +1,10 @@
 package com.malikpoutch.tramparadise.metier.connexionBDD.UsersBDD;
 
 import android.app.ProgressDialog;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -39,6 +41,12 @@ public class GetAllUserOther extends AsyncTask<String, String, String> {
     TextView ouest;
     TextView sud;
     TextView nord;
+    //Comptage du nombre d'utilisateur;
+    Boolean firstTime;
+    private int counter = 0;
+    private int totalP; // the total number
+    TextView totalPeople;
+    ImageView icon;
 
 
     public GetAllUserOther(GestionAffichageUserOther gestionAffichageUserOther, TextView est, TextView ouest, TextView sud, TextView nord) {
@@ -49,8 +57,11 @@ public class GetAllUserOther extends AsyncTask<String, String, String> {
         this.ouest=ouest;
     }
 
-    public GetAllUserOther(GestionAffichageUserOther gestionAffichageUserOther) {
+    public GetAllUserOther(GestionAffichageUserOther gestionAffichageUserOther, TextView totalPeople, ImageView icon, Boolean firstTime) {
         this.gestionAffichageUserOther = gestionAffichageUserOther;
+        this.totalPeople =totalPeople;
+        this.icon = icon;
+        this.firstTime = firstTime;
     }
 
     // Progress Dialog
@@ -166,13 +177,52 @@ public class GetAllUserOther extends AsyncTask<String, String, String> {
 
         //Je les affichent
 
-        Log.e("nbEst", gestionAffichageUserOther.getNbOtherEst()+"");
-        est.setText(gestionAffichageUserOther.getNbOtherEst()+"");
-        ouest.setText(gestionAffichageUserOther.getNbOtherOuest()+"");
-        sud.setText(gestionAffichageUserOther.getNbOtherSud() + "");
-        nord.setText(gestionAffichageUserOther.getNbOtherNorth() + "");
+        Log.e("nbEst", gestionAffichageUserOther.getNbOtherEst() + "");
+
+        //est.setText(gestionAffichageUserOther.getNbOtherEst()+"");
+        //ouest.setText(gestionAffichageUserOther.getNbOtherOuest()+"");
+        //sud.setText(gestionAffichageUserOther.getNbOtherSud() + "");
+        //nord.setText(gestionAffichageUserOther.getNbOtherNorth() + "");
+
+        totalP = gestionAffichageUserOther.getLstUserOthers().size();
+        //Init
+        //Ajuste la taille du chiffre
+        //float tailleIcon= icon.getHeight();
+        //totalPeople.setTextScaleX(tailleIcon);
+
+        totalPeople.setText("" + counter);
 
 
+        //effet d'un compteur
+        if (firstTime) {
+            new Thread(new Runnable() {
+
+                public void run() {
+                    while (counter < totalP) {
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        totalPeople.post(new Runnable() {
+
+                            public void run() {
+                                totalPeople.setText("" + counter);
+
+                            }
+
+                        });
+                        counter++;
+                    }
+
+                }
+
+            }).start();
+
+        }else{
+            totalPeople.setText("" + totalP);
+        }
 
     }
 }

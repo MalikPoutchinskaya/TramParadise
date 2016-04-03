@@ -5,14 +5,20 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.malikpoutch.tramparadise.R;
 import com.malikpoutch.tramparadise.metier.GestionLigneTram;
 import com.malikpoutch.tramparadise.metier.IEvenementSignal;
 import com.malikpoutch.tramparadise.metier.mock.EvenementSignalMock;
+import com.malikpoutch.tramparadise.presentation.MapActivity;
+import com.malikpoutch.tramparadise.utils.CustomProgressDialog;
 import com.malikpoutch.tramparadise.utils.GestionImage;
 import com.malikpoutch.tramparadise.utils.JSONParser;
 import com.malikpoutch.tramparadise.utils.VibrationTel;
@@ -40,20 +46,19 @@ import java.util.Locale;
 public class GetAllEvent extends AsyncTask<String, String, String> {
 
 
-
     //Context + GoogleMap +  constructeur
     private Context mContext;
     private GoogleMap mapi;
     private VibrationTel vibrationTel;
+    private ProgressBar pbar;
 
 
-
-
-    public GetAllEvent(Context context, GoogleMap map, VibrationTel vibrationTel) {
+    public GetAllEvent(Context context, GoogleMap map, VibrationTel vibrationTel, ProgressBar pbar
+    ) {
         this.mContext = context;
         this.mapi = map;
         this.vibrationTel = vibrationTel;
-
+        this.pbar = pbar;
     }
 
 
@@ -74,7 +79,6 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
     ArrayList<Double> listLat = new ArrayList<Double>();
     ArrayList<Double> listLong = new ArrayList<Double>();
     ArrayList<String> listDate = new ArrayList<String>();
-
 
 
     // creating new HashMap
@@ -100,7 +104,6 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
     private static final String TAG_DATE = "date";
 
 
-
     // products JSONArray
     JSONArray products = null;
 
@@ -112,6 +115,7 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
     }
+
 
     /**
      * getting All products from url
@@ -152,8 +156,6 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
                     listDate.add(date);
 
 
-
-
                     // adding each child node to HashMap key => value
                     map.put(TAG_PID, id);
                     map.put(TAG_NAME, name);
@@ -171,6 +173,7 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+
         }
 
         return null;
@@ -179,6 +182,7 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
     protected void onPostExecute(String file_url) {
         //Enlève les markers présent sur la map
         mapi.clear();
+
 
 
         //On parcour l'arrayList
@@ -198,7 +202,6 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
                     //Ajoute tout les marker de la base à la map
                     mapi.addMarker(new MarkerOptions()
                             .icon(BitmapDescriptorFactory.fromBitmap(marker))
-                            .title(listDate.get(a))
                             .position(new LatLng(listLat.get(a), listLong.get(a))));
 
                     //Remet les lignes de Tram!
@@ -211,9 +214,8 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
                     if (hasNewEvent(vibrationTel.getSizeBddBefore(), eventList.size()) == true && vibrationTel.getNbrePassage() != 0) {
                         //Le telephone vibre
                         vibrationTel.doVibration();
-                       // Log.e("Viiibre!! befor",vibrationTel.getSizeBddBefore()+"");
-                       // Log.e("after", eventList.size()+"");
-
+                        // Log.e("Viiibre!! befor",vibrationTel.getSizeBddBefore()+"");
+                        // Log.e("after", eventList.size()+"");
 
 
                     }
@@ -227,6 +229,7 @@ public class GetAllEvent extends AsyncTask<String, String, String> {
             }
 
         }
+        pbar.setVisibility(View.GONE);
 
     }
 

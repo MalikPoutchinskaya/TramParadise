@@ -19,7 +19,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/titre_event"
     android:layout_width="match_parent"
-    android:textColor="#ff6f8291"
+    android:textColor="#ff7086"
     android:layout_height="70dp"
     android:fontFamily="sans-serif"
     android:gravity="center_vertical"
